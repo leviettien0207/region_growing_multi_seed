@@ -78,6 +78,7 @@ def img_region_grow(img, label_in):
         if seed is not None:
             mask = regionGrow(img, mask, seed, thresh, neighbor_num=8, label=label)
 
+            # cv2.imshow("mask", mask)
             label += 10
 
         else:
