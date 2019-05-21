@@ -58,18 +58,17 @@ def regionGrow(img, mask, seed, thresh, neighbor_num=8, label=1):
 
 def find_undetermined(mask):
     zero_pos = np.where(mask == 0)
-    # print(zero_pos)
+
     if len(zero_pos[0]) == 0:
         return None
     x = zero_pos[0][0]
     y = zero_pos[1][0]
-    # print(x)
-    # print(y)
+
     return Point(x, y)
 
 
 def img_region_grow(img, label_in):
-    """ gray image region grow algorithm """
+    """ gray image region grow algorithm, different region will have different labels """
     mask = np.zeros(img.shape)
     thresh = 100
     label = label_in
@@ -78,11 +77,9 @@ def img_region_grow(img, label_in):
         seed = find_undetermined(mask)
         if seed is not None:
             mask = regionGrow(img, mask, seed, thresh, neighbor_num=8, label=label)
-            # np.set_printoptions(threshold=np.inf)
 
             label += 10
-            # cv2.imshow(' ', mask)
-            # cv2.waitKey(0)
+
         else:
             print("Process Done!")
             break
